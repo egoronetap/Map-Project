@@ -1,5 +1,6 @@
 import sys
 from PyQt5 import uic
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QWidget
 
@@ -65,6 +66,9 @@ class Window(QWidget):
         pixmap = QPixmap()
         pixmap.loadFromData(self.ti_lox())
         self.map_label.setPixmap(pixmap)
+
+    # def keyPressEvent(self, event):
+    #     if event.key == Qt.Key_PageUp:
 
 
 if __name__ == '__main__':
