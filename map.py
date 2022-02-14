@@ -14,6 +14,7 @@ from PIL import Image
 class Window(QWidget):
     def __init__(self):
         super().__init__()
+        self.z = 17
         uic.loadUi('map.ui', self)
         self.setWindowTitle('Карта')
         self.upload_to_widget()
@@ -51,7 +52,7 @@ class Window(QWidget):
         map_params = {
             "ll": ",".join([toponym_longitude, toponym_lattitude]),
             # "spn": get_spn(toponym),
-            "z": 17,
+            "z": self.z,
             "l": "map",
             "size": "650,450"
         }
@@ -67,8 +68,12 @@ class Window(QWidget):
         pixmap.loadFromData(self.get_pic())
         self.map_label.setPixmap(pixmap)
 
-    # def keyPressEvent(self, event):
-    #     if event.key == Qt.Key_PageUp:
+    def keyPressEvent(self, event):
+        if event.key() == Qt.Key_PageUp and self.z != 21:
+            self.z += 1
+        elif event.key() == Qt.Key_PageDown and self.z != 1:
+            self.z -= 1
+        self.upload_to_widget()
 
 
 if __name__ == '__main__':
