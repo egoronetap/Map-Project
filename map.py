@@ -17,9 +17,8 @@ class Window(QWidget):
         uic.loadUi('map.ui', self)
         self.setWindowTitle('Карта')
         self.upload_to_widget()
-        # self.ti_lox()
 
-    def ti_lox(self):
+    def get_pic(self):
         # toponym_to_find = " ".join(sys.argv[1:])
 
         toponym_to_find = 'Москва, ул. Верхние поля, 30'
@@ -51,7 +50,8 @@ class Window(QWidget):
         # Собираем параметры для запроса к StaticMapsAPI:
         map_params = {
             "ll": ",".join([toponym_longitude, toponym_lattitude]),
-            "spn": get_spn(toponym),
+            # "spn": get_spn(toponym),
+            "z": 17,
             "l": "map",
             "size": "650,450"
         }
@@ -64,7 +64,7 @@ class Window(QWidget):
 
     def upload_to_widget(self):
         pixmap = QPixmap()
-        pixmap.loadFromData(self.ti_lox())
+        pixmap.loadFromData(self.get_pic())
         self.map_label.setPixmap(pixmap)
 
     # def keyPressEvent(self, event):
